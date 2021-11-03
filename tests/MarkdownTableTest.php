@@ -190,4 +190,23 @@ class MarkdownTableTest extends PHPUnit
             '',
         ]), $table->render());
     }
+
+    public function testMinimalLength()
+    {
+        $table = (new Table())
+            ->addAutoIndex()
+            ->setMinCellLength(5)
+            ->setHeaders(['Header #1', 'Header #2'])
+            ->appendRow(['123', '456'])
+            ->appendRows([['789_1', '9871'], ['789_2', '']]);
+
+        isSame(implode("\n", [
+            '|     # | Header #1 | Header #2 |',
+            '|------:|:----------|:----------|',
+            '|     1 | 123       | 456       |',
+            '|     2 | 789_1     | 9871      |',
+            '|     3 | 789_2     |           |',
+            '',
+        ]), $table->render());
+    }
 }

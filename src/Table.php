@@ -27,8 +27,6 @@ class Table
     public const ALIGN_CENTER = 'Center';
     public const ALIGN_RIGHT  = 'Right';
 
-    public const CELL_MIN_LENGTH = 1;
-
     /**
      * @var string[]
      */
@@ -48,6 +46,11 @@ class Table
      * @var array
      */
     private $autoIndexConfig = [];
+
+    /**
+     * @var int
+     */
+    private $minCellLength = 1;
 
     /**
      * @param string $headerName
@@ -70,6 +73,15 @@ class Table
     public function removeAutoIndex(): self
     {
         $this->autoIndexConfig = [];
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setMinCellLength(int $minLength): self
+    {
+        $this->minCellLength = $minLength;
         return $this;
     }
 
@@ -137,7 +149,7 @@ class Table
             return '';
         }
 
-        $widths = self::calculateWidths($actualHeaders, $actualRows);
+        $widths = $this->calculateWidths($actualHeaders, $actualRows);
         if (count($actualHeaders) === 0) {
             return $this->renderRows($widths, $actualRows);
         }
@@ -150,7 +162,7 @@ class Table
      * @param array[] $actualRows
      * @return array
      */
-    protected static function calculateWidths(array $actualHeaders, array $actualRows): array
+    protected function calculateWidths(array $actualHeaders, array $actualRows): array
     {
         $widths = [];
 
@@ -167,8 +179,8 @@ class Table
         }
 
         // all columns must be at least 3 wide for the markdown to work
-        return \array_map(static function (int $width): int {
-            return $width >= self::CELL_MIN_LENGTH ? $width : self::CELL_MIN_LENGTH;
+        return \array_map(function (int $width): int {
+            return $width >= $this->minCellLength ? $width : $this->minCellLength;
         }, $widths);
     }
 
