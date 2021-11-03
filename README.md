@@ -70,7 +70,7 @@ Markdown::title('Sub Title', 3));   // ### Sub Title\n
 Markdown::url('Google', 'https://google.com');
 
 // [![Status](https://travis-ci.org/)](https://travis-ci.org/Status)
-Markdown::badge('Status', 'https://travis-ci.org/', 'https://travis-ci.org/Status'); //
+Markdown::badge('Status', 'https://travis-ci.org/', 'https://travis-ci.org/Status');
 
 // ![Logo](https://google.com/example.jpg)
 Markdown::image('https://google.com/example.jpg', 'Logo');
