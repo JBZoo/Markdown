@@ -1,7 +1,8 @@
 {
     "name"         : "jbzoo/markdown",
     "type"         : "library",
-    "description"  : "__DESCRIPTION__",
+    "description"  : "Tools to render markdown text from PHP code",
+    "keywords"     : ["jbzoo", "markdown", "text", "readme", "rendering"],
     "license"      : "MIT",
 
     "authors"      : [
@@ -19,7 +20,7 @@
     },
 
     "require-dev"  : {
-        "jbzoo/toolbox-dev" : "^2.13.1"
+        "jbzoo/toolbox-dev" : "^3.0.0"
     },
 
     "autoload"     : {

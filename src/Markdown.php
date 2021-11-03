@@ -68,11 +68,14 @@ class Markdown
      */
     public static function title(string $title, int $level = 2): string
     {
-        if ($level < 1) {
-            $level = 1;
+        $maxLevel = 1;
+        $minLevel = 6;
+
+        if ($level < $maxLevel) {
+            $level = $maxLevel;
         }
-        if ($level > 6) {
-            $level = 6;
+        if ($level > $minLevel) {
+            $level = $minLevel;
         }
 
         return str_repeat('#', $level) . " {$title}\n";
