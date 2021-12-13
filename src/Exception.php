@@ -23,5 +23,4 @@ namespace JBZoo\Markdown;
  */
 class Exception extends \RuntimeException
 {
-
 }
