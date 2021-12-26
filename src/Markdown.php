@@ -32,8 +32,8 @@ class Markdown
      */
     public static function url(?string $title = null, ?string $url = null): string
     {
-        $title = trim((string)$title);
-        $url = trim((string)$url);
+        $title = \trim((string)$title);
+        $url = \trim((string)$url);
 
         if (empty($title) && !empty($url)) {
             return "[$url]($url)";
@@ -78,7 +78,7 @@ class Markdown
             $level = $minLevel;
         }
 
-        return str_repeat('#', $level) . " {$title}\n";
+        return \str_repeat('#', $level) . " {$title}\n";
     }
 
     /**
@@ -88,10 +88,10 @@ class Markdown
      */
     public static function image(?string $url, ?string $altText = null): string
     {
-        $altText = trim((string)$altText);
+        $altText = \trim((string)$altText);
         $altText = $altText ?: 'Image';
 
-        $url = trim((string)$url);
+        $url = \trim((string)$url);
 
         return "![{$altText}]({$url})";
     }
@@ -102,11 +102,11 @@ class Markdown
      */
     public static function blockquote($quoteLines): string
     {
-        if (!is_array($quoteLines) && strpos($quoteLines, "\n") !== false) {
+        if (!\is_array($quoteLines) && \strpos($quoteLines, "\n") !== false) {
             $quoteLines = Str::parseLines($quoteLines, false);
         }
 
-        if (is_array($quoteLines)) {
+        if (\is_array($quoteLines)) {
             $result = '';
             foreach ($quoteLines as $quoteLine) {
                 $result .= self::blockquote($quoteLine);
@@ -135,7 +135,7 @@ class Markdown
             '',
         ];
 
-        return implode("\n", $result);
+        return \implode("\n", $result);
     }
 
     /**
@@ -152,6 +152,6 @@ class Markdown
             '',
         ];
 
-        return implode("\n", $result);
+        return \implode("\n", $result);
     }
 }

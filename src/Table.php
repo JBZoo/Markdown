@@ -134,23 +134,23 @@ class Table
         $actualRows = $this->rows;
 
         if ($this->isAutoIndexEnabled()) {
-            array_unshift($actualHeaders, $this->autoIndexConfig['header_name']);
+            \array_unshift($actualHeaders, $this->autoIndexConfig['header_name']);
 
             $indexStart = $this->autoIndexConfig['start_index'];
             foreach ($actualRows as $index => $actualRow) {
-                array_unshift($actualRow, $indexStart);
+                \array_unshift($actualRow, $indexStart);
                 $actualRows[$index] = $actualRow;
 
                 $indexStart++;
             }
         }
 
-        if (count($actualRows) === 0 && count($actualHeaders) === 0) {
+        if (\count($actualRows) === 0 && \count($actualHeaders) === 0) {
             return '';
         }
 
         $widths = $this->calculateWidths($actualHeaders, $actualRows);
-        if (count($actualHeaders) === 0) {
+        if (\count($actualHeaders) === 0) {
             return $this->renderRows($widths, $actualRows);
         }
 
@@ -296,13 +296,13 @@ class Table
         $actualAlignments = $this->alignments;
 
         if ($this->isAutoIndexEnabled()) {
-            array_unshift($actualAlignments, self::ALIGN_RIGHT);
+            \array_unshift($actualAlignments, self::ALIGN_RIGHT);
         }
 
         $result = $actualAlignments[$colIndex] ?? self::ALIGN_LEFT;
 
         if (!\in_array($result, $validAligns, true)) {
-            throw new \Exception("Invalid alignment for column index {$colIndex}: {$result}");
+            throw new Exception("Invalid alignment for column index {$colIndex}: {$result}");
         }
 
         return $result;
@@ -313,6 +313,6 @@ class Table
      */
     private function isAutoIndexEnabled(): bool
     {
-        return count($this->autoIndexConfig) > 0;
+        return \count($this->autoIndexConfig) > 0;
     }
 }
