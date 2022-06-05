@@ -24,17 +24,5 @@ namespace JBZoo\PHPUnit;
  */
 class MarkdownReadmeTest extends AbstractReadmeTest
 {
-    /**
-     * @var string
-     */
-    protected $packageName = 'Markdown';
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->params['travis'] = false;
-    }
+    protected string $packageName = 'Markdown';
 }
