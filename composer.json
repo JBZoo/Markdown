@@ -14,13 +14,12 @@
     ],
 
     "require"      : {
-        "php"         : ">=7.2",
-
-        "jbzoo/utils" : "^4.4.0"
+        "php"         : ">=7.4",
+        "jbzoo/utils" : "^4.5|^5.0"
     },
 
     "require-dev"  : {
-        "jbzoo/toolbox-dev" : "^3.1.0"
+        "jbzoo/toolbox-dev" : "^4.0.1"
     },
 
     "autoload"     : {
@@ -35,8 +34,8 @@
 
     "config"       : {
         "optimize-autoloader" : true,
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true
+        "allow-plugins"       : {
+            "composer/package-versions-deprecated" : true
         }
     },
 

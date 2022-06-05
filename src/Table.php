@@ -30,27 +30,27 @@ class Table
     /**
      * @var string[]
      */
-    private $headers = [];
+    private array $headers = [];
 
     /**
      * @var string[]
      */
-    private $alignments = [];
+    private array $alignments = [];
 
     /**
      * @var array[]
      */
-    private $rows = [];
+    private array $rows = [];
 
     /**
      * @var array
      */
-    private $autoIndexConfig = [];
+    private array $autoIndexConfig = [];
 
     /**
      * @var int
      */
-    private $minCellLength = 1;
+    private int $minCellLength = 1;
 
     /**
      * @param string $headerName
@@ -180,7 +180,7 @@ class Table
 
         // all columns must be at least 3 wide for the markdown to work
         return \array_map(function (int $width): int {
-            return $width >= $this->minCellLength ? $width : $this->minCellLength;
+            return \max($width, $this->minCellLength);
         }, $widths);
     }
 
