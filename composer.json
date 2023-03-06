@@ -15,7 +15,7 @@
 
     "require"      : {
         "php"         : ">=7.4",
-        "jbzoo/utils" : "^4.5|^5.0"
+        "jbzoo/utils" : "^4.5|^5.0|dev-master|7.x-dev"
     },
 
     "require-dev"  : {
