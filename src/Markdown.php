@@ -22,6 +22,9 @@ use function JBZoo\Utils\isStrEmpty;
 
 class Markdown
 {
+    /**
+     * Insert link to markdown text.
+     */
     public static function url(?string $title = null, ?string $url = null): ?string
     {
         $title = \trim((string)$title);
@@ -42,11 +45,17 @@ class Markdown
         return "[{$title}]({$url})";
     }
 
+    /**
+     * Insert badge to markdown text.
+     */
     public static function badge(string $name, string $svgUrl, string $serviceUrl): ?string
     {
         return self::url(self::image($svgUrl, $name), $serviceUrl);
     }
 
+    /**
+     * Insert title to markdown text.
+     */
     public static function title(string $title, int $level = 2): string
     {
         $maxLevel = 1;
@@ -62,6 +71,9 @@ class Markdown
         return \str_repeat('#', $level) . " {$title}\n";
     }
 
+    /**
+     * Insert image to markdown text.
+     */
     public static function image(?string $url, ?string $altText = null): string
     {
         $altText = \trim((string)$altText);
@@ -94,6 +106,9 @@ class Markdown
         return "> {$quoteLines}\n";
     }
 
+    /**
+     * Render HTML block to hide text under spoiler.
+     */
     public static function spoiler(string $title, string $body): string
     {
         $result = [
@@ -109,6 +124,9 @@ class Markdown
         return \implode("\n", $result);
     }
 
+    /**
+     * Show code block as part of documentation.
+     */
     public static function code(string $code, string $language = ''): string
     {
         $result = [

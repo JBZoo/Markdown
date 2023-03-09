@@ -48,9 +48,6 @@ class Table
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function removeAutoIndex(): self
     {
         $this->autoIndexConfig = [];
@@ -58,9 +55,6 @@ class Table
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function setMinCellLength(int $minLength): self
     {
         $this->minCellLength = $minLength;
@@ -68,9 +62,6 @@ class Table
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function setHeaders(array $newHeaders): self
     {
         $this->headers = $newHeaders;
@@ -78,9 +69,6 @@ class Table
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function setAlignments(array $alignments): self
     {
         $this->alignments = $alignments;
@@ -88,9 +76,6 @@ class Table
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function appendRow(array $row): self
     {
         $this->rows[] = $row;
@@ -98,9 +83,6 @@ class Table
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function appendRows(array $rows): self
     {
         $this->rows = \array_merge($this->rows, $rows);
@@ -239,10 +221,7 @@ class Table
         return $row;
     }
 
-    /**
-     * @param int|string $colIndex
-     */
-    protected function getColumnAlign($colIndex): string
+    protected function getColumnAlign(int|string $colIndex): string
     {
         $validAligns      = [self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT];
         $actualAlignments = $this->alignments;
