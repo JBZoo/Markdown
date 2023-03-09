@@ -1,16 +1,15 @@
 <?php
 
 /**
- * JBZoo Toolbox - Markdown
+ * JBZoo Toolbox - Markdown.
  *
  * This file is part of the JBZoo Toolbox project.
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @package    Markdown
  * @license    MIT
  * @copyright  Copyright (C) JBZoo.com, All rights reserved.
- * @link       https://github.com/JBZoo/Markdown
+ * @see        https://github.com/JBZoo/Markdown
  */
 
 declare(strict_types=1);
@@ -19,25 +18,21 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\Markdown\Table;
 
-/**
- * Class MarkdownTableTest
- * @package JBZoo\PHPUnit
- */
 class MarkdownTableTest extends PHPUnit
 {
-    public function testEmptyOne()
+    public function testEmptyOne(): void
     {
         $table = (new Table());
         isSame('', $table->render());
     }
 
-    public function testOneAndOne()
+    public function testOneAndOne(): void
     {
         $table = (new Table())
             ->setHeaders(['Header #1'])
             ->appendRow(['123']);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Header #1 |',
             '|:----------|',
             '| 123       |',
@@ -45,19 +40,19 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testNoRowsTable()
+    public function testNoRowsTable(): void
     {
         $table = (new Table())
             ->setHeaders(['Header #1', 'Header #2']);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Header #1 | Header #2 |',
             '|:----------|:----------|',
             '',
         ]), $table->render());
     }
 
-    public function testNoHeadersTable()
+    public function testNoHeadersTable(): void
     {
         $table = (new Table())
             ->appendRow(['123', 456]);
@@ -65,13 +60,13 @@ class MarkdownTableTest extends PHPUnit
         isSame("| 123 | 456 |\n", $table->render());
     }
 
-    public function testOneRowTable()
+    public function testOneRowTable(): void
     {
         $table = (new Table())
             ->setHeaders(['Header #1', 'Header #2'])
             ->appendRow(['123', '456']);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Header #1 | Header #2 |',
             '|:----------|:----------|',
             '| 123       | 456       |',
@@ -79,14 +74,14 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testMultiRowTable()
+    public function testMultiRowTable(): void
     {
         $table = (new Table())
             ->setHeaders(['Header #1', 'Header #2'])
             ->appendRow(['123', '456'])
             ->appendRows([['789_1', '9871'], ['789_2', '']]);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Header #1 | Header #2 |',
             '|:----------|:----------|',
             '| 123       | 456       |',
@@ -96,7 +91,7 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testAutoIndexDefault()
+    public function testAutoIndexDefault(): void
     {
         $table = (new Table())
             ->addAutoIndex()
@@ -104,7 +99,7 @@ class MarkdownTableTest extends PHPUnit
             ->appendRow(['123', '456'])
             ->appendRows([['789_1', '9871'], ['789_2', '']]);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| # | Header #1 | Header #2 |',
             '|--:|:----------|:----------|',
             '| 1 | 123       | 456       |',
@@ -114,7 +109,7 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testAutoIndexCustom()
+    public function testAutoIndexCustom(): void
     {
         $table = (new Table())
             ->addAutoIndex('Index', 999)
@@ -122,7 +117,7 @@ class MarkdownTableTest extends PHPUnit
             ->appendRow(['123', '456'])
             ->appendRows([['789_1', '9871'], ['789_2', '']]);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Index | Header #1 | Header #2 |',
             '|------:|:----------|:----------|',
             '|   999 | 123       | 456       |',
@@ -132,7 +127,7 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testRemoveAutoIndex()
+    public function testRemoveAutoIndex(): void
     {
         $table = (new Table())
             ->addAutoIndex('Index', 999)
@@ -140,7 +135,7 @@ class MarkdownTableTest extends PHPUnit
             ->appendRow(['123', '456'])
             ->appendRows([['789_1', '9871'], ['789_2', '']]);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Index | Header #1 | Header #2 |',
             '|------:|:----------|:----------|',
             '|   999 | 123       | 456       |',
@@ -151,7 +146,7 @@ class MarkdownTableTest extends PHPUnit
 
         $table->removeAutoIndex();
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Header #1 | Header #2 |',
             '|:----------|:----------|',
             '| 123       | 456       |',
@@ -161,7 +156,7 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testAligments()
+    public function testAligments(): void
     {
         $table = (new Table())
             ->addAutoIndex('Index', 999)
@@ -170,7 +165,7 @@ class MarkdownTableTest extends PHPUnit
             ->appendRow(['123', '456'])
             ->appendRows([['789_1', '9871'], ['789_2', '']]);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Index | Header #1 | Header #2 |',
             '|------:|:---------:|----------:|',
             '|   999 |    123    |       456 |',
@@ -181,7 +176,7 @@ class MarkdownTableTest extends PHPUnit
 
         $table->removeAutoIndex();
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '| Header #1 | Header #2 |',
             '|:---------:|----------:|',
             '|    123    |       456 |',
@@ -191,7 +186,7 @@ class MarkdownTableTest extends PHPUnit
         ]), $table->render());
     }
 
-    public function testMinimalLength()
+    public function testMinimalLength(): void
     {
         $table = (new Table())
             ->addAutoIndex()
@@ -200,7 +195,7 @@ class MarkdownTableTest extends PHPUnit
             ->appendRow(['123', '456'])
             ->appendRows([['789_1', '9871'], ['789_2', '']]);
 
-        isSame(implode("\n", [
+        isSame(\implode("\n", [
             '|     # | Header #1 | Header #2 |',
             '|------:|:----------|:----------|',
             '|     1 | 123       | 456       |',
