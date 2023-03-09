@@ -1,16 +1,15 @@
 <?php
 
 /**
- * JBZoo Toolbox - Markdown
+ * JBZoo Toolbox - Markdown.
  *
  * This file is part of the JBZoo Toolbox project.
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @package    Markdown
  * @license    MIT
  * @copyright  Copyright (C) JBZoo.com, All rights reserved.
- * @link       https://github.com/JBZoo/Markdown
+ * @see        https://github.com/JBZoo/Markdown
  */
 
 declare(strict_types=1);
@@ -19,52 +18,43 @@ namespace JBZoo\Markdown;
 
 use JBZoo\Utils\Str;
 
-/**
- * Class Markdown
- * @package JBZoo\Markdown
- */
+use function JBZoo\Utils\isStrEmpty;
+
 class Markdown
 {
     /**
-     * @param string|null $title
-     * @param string|null $url
-     * @return string
+     * Insert link to markdown text.
      */
-    public static function url(?string $title = null, ?string $url = null): string
+    public static function url(?string $title = null, ?string $url = null): ?string
     {
         $title = \trim((string)$title);
-        $url = \trim((string)$url);
+        $url   = \trim((string)$url);
 
-        if (empty($title) && !empty($url)) {
-            return "[$url]($url)";
+        if (isStrEmpty($title) && !isStrEmpty($url)) {
+            return "[{$url}]({$url})";
         }
 
-        if (!empty($title) && empty($url)) {
+        if (!isStrEmpty($title) && isStrEmpty($url)) {
             return $title;
         }
 
-        if (empty($title) && empty($url)) {
-            return '';
+        if (isStrEmpty($title) && isStrEmpty($url)) {
+            return null;
         }
 
         return "[{$title}]({$url})";
     }
 
     /**
-     * @param string $name
-     * @param string $svgUrl
-     * @param string $serviceUrl
-     * @return string
+     * Insert badge to markdown text.
      */
-    public static function badge(string $name, string $svgUrl, string $serviceUrl): string
+    public static function badge(string $name, string $svgUrl, string $serviceUrl): ?string
     {
         return self::url(self::image($svgUrl, $name), $serviceUrl);
     }
 
     /**
-     * @param string $title
-     * @param int    $level
-     * @return string
+     * Insert title to markdown text.
      */
     public static function title(string $title, int $level = 2): string
     {
@@ -82,14 +72,12 @@ class Markdown
     }
 
     /**
-     * @param string|null $url
-     * @param string|null $altText
-     * @return string
+     * Insert image to markdown text.
      */
     public static function image(?string $url, ?string $altText = null): string
     {
         $altText = \trim((string)$altText);
-        $altText = $altText ?: 'Image';
+        $altText = $altText === '' ? 'Image' : $altText;
 
         $url = \trim((string)$url);
 
@@ -97,17 +85,17 @@ class Markdown
     }
 
     /**
-     * @param string[]|string $quoteLines
-     * @return string
+     * @param string|string[] $quoteLines
      */
-    public static function blockquote($quoteLines): string
+    public static function blockquote(array|string $quoteLines): string
     {
-        if (!\is_array($quoteLines) && \strpos($quoteLines, "\n") !== false) {
+        if (!\is_array($quoteLines) && \str_contains($quoteLines, "\n")) {
             $quoteLines = Str::parseLines($quoteLines, false);
         }
 
         if (\is_array($quoteLines)) {
             $result = '';
+
             foreach ($quoteLines as $quoteLine) {
                 $result .= self::blockquote($quoteLine);
             }
@@ -119,9 +107,7 @@ class Markdown
     }
 
     /**
-     * @param string $title
-     * @param string $body
-     * @return string
+     * Render HTML block to hide text under spoiler.
      */
     public static function spoiler(string $title, string $body): string
     {
@@ -139,9 +125,7 @@ class Markdown
     }
 
     /**
-     * @param string $code
-     * @param string $language
-     * @return string
+     * Show code block as part of documentation.
      */
     public static function code(string $code, string $language = ''): string
     {

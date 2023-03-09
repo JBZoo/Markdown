@@ -1,142 +1,105 @@
 <?php
 
 /**
- * JBZoo Toolbox - Markdown
+ * JBZoo Toolbox - Markdown.
  *
  * This file is part of the JBZoo Toolbox project.
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @package    Markdown
  * @license    MIT
  * @copyright  Copyright (C) JBZoo.com, All rights reserved.
- * @link       https://github.com/JBZoo/Markdown
+ * @see        https://github.com/JBZoo/Markdown
  */
 
 declare(strict_types=1);
 
 namespace JBZoo\Markdown;
 
-/**
- * Class Table
- * @package JBZoo\Markdown
- */
 class Table
 {
     public const ALIGN_LEFT   = 'Left';
     public const ALIGN_CENTER = 'Center';
     public const ALIGN_RIGHT  = 'Right';
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private array $headers = [];
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private array $alignments = [];
 
-    /**
-     * @var array[]
-     */
+    /** @var array[] */
     private array $rows = [];
 
-    /**
-     * @var array
-     */
     private array $autoIndexConfig = [];
 
-    /**
-     * @var int
-     */
     private int $minCellLength = 1;
 
     /**
-     * @param string $headerName
-     * @param int    $startIndex
      * @return $this
      */
     public function addAutoIndex(string $headerName = '#', int $startIndex = 1): self
     {
         $this->autoIndexConfig = [
             'header_name' => $headerName,
-            'start_index' => $startIndex
+            'start_index' => $startIndex,
         ];
 
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function removeAutoIndex(): self
     {
         $this->autoIndexConfig = [];
+
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     public function setMinCellLength(int $minLength): self
     {
         $this->minCellLength = $minLength;
+
         return $this;
     }
 
-    /**
-     * @param array $newHeaders
-     * @return $this
-     */
     public function setHeaders(array $newHeaders): self
     {
         $this->headers = $newHeaders;
+
         return $this;
     }
 
-    /**
-     * @param array $alignments
-     * @return $this
-     */
     public function setAlignments(array $alignments): self
     {
         $this->alignments = $alignments;
+
         return $this;
     }
 
-    /**
-     * @param array $row
-     * @return $this
-     */
     public function appendRow(array $row): self
     {
         $this->rows[] = $row;
+
         return $this;
     }
 
-    /**
-     * @param array $rows
-     * @return $this
-     */
     public function appendRows(array $rows): self
     {
         $this->rows = \array_merge($this->rows, $rows);
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         $actualHeaders = $this->headers;
-        $actualRows = $this->rows;
+        $actualRows    = $this->rows;
 
         if ($this->isAutoIndexEnabled()) {
             \array_unshift($actualHeaders, $this->autoIndexConfig['header_name']);
 
             $indexStart = $this->autoIndexConfig['start_index'];
+
             foreach ($actualRows as $index => $actualRow) {
                 \array_unshift($actualRow, $indexStart);
                 $actualRows[$index] = $actualRow;
@@ -158,9 +121,7 @@ class Table
     }
 
     /**
-     * @param array   $actualHeaders
      * @param array[] $actualRows
-     * @return array
      */
     protected function calculateWidths(array $actualHeaders, array $actualRows): array
     {
@@ -179,15 +140,11 @@ class Table
         }
 
         // all columns must be at least 3 wide for the markdown to work
-        return \array_map(function (int $width): int {
-            return \max($width, $this->minCellLength);
-        }, $widths);
+        return \array_map(fn (int $width): int => \max($width, $this->minCellLength), $widths);
     }
 
     /**
-     * @param int[] $widths
-     * @param array $actualHeaders
-     * @return string
+     * @param  int[]      $widths
      * @throws \Exception
      */
     protected function renderHeaders(array $widths, array $actualHeaders): string
@@ -198,7 +155,7 @@ class Table
             $result .= self::renderCell(
                 $actualHeaders[$colIndex],
                 $this->getColumnAlign($colIndex),
-                $widths[$colIndex]
+                $widths[$colIndex],
             );
 
             $result .= ' | ';
@@ -208,9 +165,7 @@ class Table
     }
 
     /**
-     * @param int[] $widths
-     * @param array $actualRows
-     * @return string
+     * @param  int[]      $widths
      * @throws \Exception
      */
     protected function renderRows(array $widths, array $actualRows): string
@@ -225,7 +180,7 @@ class Table
                 $result .= self::renderCell(
                     (string)$row[$colIndex],
                     $this->getColumnAlign($colIndex),
-                    $widths[$colIndex]
+                    $widths[$colIndex],
                 );
 
                 $result .= ' | ';
@@ -238,34 +193,14 @@ class Table
     }
 
     /**
-     * @param string $contents
-     * @param string $alignment
-     * @param int    $width
-     * @return string
-     */
-    protected static function renderCell(string $contents, string $alignment, int $width): string
-    {
-        $map = [
-            self::ALIGN_LEFT   => \STR_PAD_RIGHT,
-            self::ALIGN_CENTER => \STR_PAD_BOTH,
-            self::ALIGN_RIGHT  => \STR_PAD_LEFT,
-        ];
-
-        $padType = $map[$alignment] ?? \STR_PAD_LEFT;
-
-        return \str_pad($contents, $width, ' ', $padType);
-    }
-
-    /**
      * @param int[] $widths
-     * @return string
      */
     protected function renderAlignments(array $widths): string
     {
         $row = '|';
 
         foreach ($widths as $colIndex => $colIndexValue) {
-            $cell = \str_repeat('-', $colIndexValue + 2);
+            $cell  = \str_repeat('-', $colIndexValue + 2);
             $align = $this->getColumnAlign($colIndex);
 
             if ($align === self::ALIGN_CENTER) {
@@ -286,13 +221,9 @@ class Table
         return $row;
     }
 
-    /**
-     * @param string|int $colIndex
-     * @return string
-     */
-    protected function getColumnAlign($colIndex): string
+    protected function getColumnAlign(int|string $colIndex): string
     {
-        $validAligns = [self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT];
+        $validAligns      = [self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT];
         $actualAlignments = $this->alignments;
 
         if ($this->isAutoIndexEnabled()) {
@@ -308,9 +239,19 @@ class Table
         return $result;
     }
 
-    /**
-     * @return bool
-     */
+    protected static function renderCell(string $contents, string $alignment, int $width): string
+    {
+        $map = [
+            self::ALIGN_LEFT   => \STR_PAD_RIGHT,
+            self::ALIGN_CENTER => \STR_PAD_BOTH,
+            self::ALIGN_RIGHT  => \STR_PAD_LEFT,
+        ];
+
+        $padType = $map[$alignment] ?? \STR_PAD_LEFT;
+
+        return \str_pad($contents, $width, ' ', $padType);
+    }
+
     private function isAutoIndexEnabled(): bool
     {
         return \count($this->autoIndexConfig) > 0;
