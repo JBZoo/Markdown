@@ -23,7 +23,7 @@ use function JBZoo\Utils\isStrEmpty;
 class Markdown
 {
     /**
-     * Insert link to markdown text.
+     * Insert link to Markdown text.
      */
     public static function url(?string $title = null, ?string $url = null): ?string
     {
@@ -46,7 +46,7 @@ class Markdown
     }
 
     /**
-     * Insert badge to markdown text.
+     * Insert badge to Markdown text.
      */
     public static function badge(string $name, string $svgUrl, string $serviceUrl): ?string
     {
@@ -54,7 +54,7 @@ class Markdown
     }
 
     /**
-     * Insert title to markdown text.
+     * Insert title to Markdown text.
      */
     public static function title(string $title, int $level = 2): string
     {
@@ -72,7 +72,7 @@ class Markdown
     }
 
     /**
-     * Insert image to markdown text.
+     * Insert image to Markdown text.
      */
     public static function image(?string $url, ?string $altText = null): string
     {
