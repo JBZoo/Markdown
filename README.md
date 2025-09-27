@@ -3,19 +3,31 @@
 [![CI](https://github.com/JBZoo/Markdown/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/JBZoo/Markdown/actions/workflows/main.yml?query=branch%3Amaster)    [![Coverage Status](https://coveralls.io/repos/github/JBZoo/Markdown/badge.svg?branch=master)](https://coveralls.io/github/JBZoo/Markdown?branch=master)    [![Psalm Coverage](https://shepherd.dev/github/JBZoo/Markdown/coverage.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![Psalm Level](https://shepherd.dev/github/JBZoo/Markdown/level.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![CodeFactor](https://www.codefactor.io/repository/github/jbzoo/markdown/badge)](https://www.codefactor.io/repository/github/jbzoo/markdown/issues)
 [![Stable Version](https://poser.pugx.org/jbzoo/markdown/version)](https://packagist.org/packages/jbzoo/markdown/)    [![Total Downloads](https://poser.pugx.org/jbzoo/markdown/downloads)](https://packagist.org/packages/jbzoo/markdown/stats)    [![Dependents](https://poser.pugx.org/jbzoo/markdown/dependents)](https://packagist.org/packages/jbzoo/markdown/dependents?order_by=downloads)    [![GitHub License](https://img.shields.io/github/license/jbzoo/markdown)](https://github.com/JBZoo/Markdown/blob/master/LICENSE)
 
+Tools to render markdown text from PHP code. This library provides a simple and fluent API for generating markdown elements programmatically, including tables with advanced formatting options.
 
+## Features
 
+- **Markdown Elements**: Generate links, titles, images, badges, blockquotes, spoilers, and code blocks
+- **Advanced Tables**: Create markdown tables with auto-indexing, custom alignments, and flexible rendering
+- **Type Safety**: Full PHP 8.2+ compatibility with strict typing
+- **Fluent API**: Chainable methods for intuitive table building
+- **Zero Dependencies**: Lightweight with minimal external requirements
 
-### Installing
+## Requirements
+
+- PHP 8.2 or higher
+- Composer
+
+## Installing
 
 ```sh
 composer require jbzoo/markdown
 ```
 
 
-### Usage
+## Usage
 
-#### Rendering Table
+### Table Generation
 
 ```php
 <?php declare(strict_types=1);
@@ -56,57 +68,117 @@ Result
 </details>
 
 
-#### Rendering other tags
+### Markdown Elements
+
 ```php
 <?php declare(strict_types=1);
 
 use JBZoo\Markdown\Markdown;
 
 // Page Navigation
-Markdown::title('Page Name', 1));   // # Page Name\n
-Markdown::title('Title', 2));       // ## Title\n
-Markdown::title('Sub Title', 3));   // ### Sub Title\n
+echo Markdown::title('Page Name', 1);    // # Page Name\n
+echo Markdown::title('Title', 2);        // ## Title\n
+echo Markdown::title('Sub Title', 3);    // ### Sub Title\n
 
-// [Google](https://google.com)
-Markdown::url('Google', 'https://google.com');
+// Links
+echo Markdown::url('Google', 'https://google.com');
+// Output: [Google](https://google.com)
 
-// [![Status](https://travis-ci.org/)](https://travis-ci.org/Status)
-Markdown::badge('Status', 'https://travis-ci.org/', 'https://travis-ci.org/Status');
+// Badges
+echo Markdown::badge('Status', 'https://travis-ci.org/badge.svg', 'https://travis-ci.org/');
+// Output: [![Status](https://travis-ci.org/badge.svg)](https://travis-ci.org/)
 
-// ![Logo](https://google.com/example.jpg)
-Markdown::image('https://google.com/example.jpg', 'Logo');
+// Images
+echo Markdown::image('https://example.com/logo.jpg', 'Logo');
+// Output: ![Logo](https://example.com/logo.jpg)
 
-// > Quote LIne 1
-// > Quote LIne 2
-// > Quote LIne 3
-Markdown::blockquote(["Quote LIne 1\nQuote LIne 2\nQuote LIne 3"]);
-Markdown::blockquote(['Quote LIne 1', 'Quote LIne 2', 'Quote LIne 3'])
+// Blockquotes
+echo Markdown::blockquote(['Quote Line 1', 'Quote Line 2', 'Quote Line 3']);
+// Output:
+// > Quote Line 1
+// > Quote Line 2
+// > Quote Line 3
 
+// Spoiler (collapsible content)
+echo Markdown::spoiler('Click to expand', 'Hidden content here');
+// Output:
 // <details>
-//   <summary>Quote Text</summary>
+//   <summary>Click to expand</summary>
 //
-//   Some hidden text
+//   Hidden content here
 //
 // </details>
-Markdown::spoiler('Quote Text', 'Some hidden text');
 
+// Code blocks
+echo Markdown::code("<?php\necho 'Hello World';\n", 'php');
+// Output:
 // ```php
 // <?php
-// echo 1;
+// echo 'Hello World';
 //
 // ```
-Markdown::code("<?php\necho 1;\n", 'php');
+```
 
+### Table Features
+
+The Table class supports various advanced features:
+
+```php
+<?php declare(strict_types=1);
+
+use JBZoo\Markdown\Table;
+
+// Basic table
+$table = new Table();
+$table->setHeaders(['Name', 'Age', 'City'])
+      ->appendRow(['John', '25', 'New York'])
+      ->appendRow(['Jane', '30', 'London']);
+
+echo $table->render();
+
+// Table with alignments
+$table = new Table();
+$table->setHeaders(['Left', 'Center', 'Right'])
+      ->setAlignments([Table::ALIGN_LEFT, Table::ALIGN_CENTER, Table::ALIGN_RIGHT])
+      ->appendRow(['Text', 'Text', 'Text']);
+
+echo $table->render();
+
+// Table with auto-indexing
+$table = new Table();
+$table->addAutoIndex('#', 1)
+      ->setHeaders(['Item', 'Price'])
+      ->appendRows([
+          ['Apple', '$1.00'],
+          ['Banana', '$0.50'],
+          ['Orange', '$0.75']
+      ]);
+
+echo $table->render();
 ```
 
 
-## Unit tests and check code style
+## Development
+
+### Setup
 ```sh
-make update
-make test-all
+make update          # Install/update dependencies
 ```
 
+### Testing
+```sh
+make test           # Run PHPUnit tests
+make test-all       # Run all tests and code quality checks
+make codestyle      # Run linters and code style checks
+```
 
-### License
+### Available Make Targets
+Run `make help` to see all available commands including:
+- Code quality tools (PHPStan, Psalm, PHPCS, etc.)
+- Performance testing
+- Report generation
+- Build tools
+
+## License
 
 MIT
