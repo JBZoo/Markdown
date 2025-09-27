@@ -1,6 +1,6 @@
 # JBZoo / Markdown
 
-[![CI](https://github.com/JBZoo/Markdown/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/JBZoo/Markdown/actions/workflows/main.yml?query=branch%3Amaster)    [![Coverage Status](https://coveralls.io/repos/github/JBZoo/Markdown/badge.svg?branch=master)](https://coveralls.io/github/JBZoo/Markdown?branch=master)    [![Psalm Coverage](https://shepherd.dev/github/JBZoo/Markdown/coverage.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![Psalm Level](https://shepherd.dev/github/JBZoo/Markdown/level.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![CodeFactor](https://www.codefactor.io/repository/github/jbzoo/markdown/badge)](https://www.codefactor.io/repository/github/jbzoo/markdown/issues)    
+[![CI](https://github.com/JBZoo/Markdown/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/JBZoo/Markdown/actions/workflows/main.yml?query=branch%3Amaster)    [![Coverage Status](https://coveralls.io/repos/github/JBZoo/Markdown/badge.svg?branch=master)](https://coveralls.io/github/JBZoo/Markdown?branch=master)    [![Psalm Coverage](https://shepherd.dev/github/JBZoo/Markdown/coverage.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![Psalm Level](https://shepherd.dev/github/JBZoo/Markdown/level.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![CodeFactor](https://www.codefactor.io/repository/github/jbzoo/markdown/badge)](https://www.codefactor.io/repository/github/jbzoo/markdown/issues)
 [![Stable Version](https://poser.pugx.org/jbzoo/markdown/version)](https://packagist.org/packages/jbzoo/markdown/)    [![Total Downloads](https://poser.pugx.org/jbzoo/markdown/downloads)](https://packagist.org/packages/jbzoo/markdown/stats)    [![Dependents](https://poser.pugx.org/jbzoo/markdown/dependents)](https://packagist.org/packages/jbzoo/markdown/dependents?order_by=downloads)    [![GitHub License](https://img.shields.io/github/license/jbzoo/markdown)](https://github.com/JBZoo/Markdown/blob/master/LICENSE)
 
 
@@ -52,7 +52,7 @@ Result
   |   999 |    123    |       456 |
   |  1000 |   789_1   |      9871 |
   |  1001 |   789_2   |           |
-  
+
 </details>
 
 
@@ -84,16 +84,16 @@ Markdown::blockquote(['Quote LIne 1', 'Quote LIne 2', 'Quote LIne 3'])
 
 // <details>
 //   <summary>Quote Text</summary>
-//   
+//
 //   Some hidden text
-//   
+//
 // </details>
 Markdown::spoiler('Quote Text', 'Some hidden text');
 
 // ```php
 // <?php
 // echo 1;
-// 
+//
 // ```
 Markdown::code("<?php\necho 1;\n", 'php');
 

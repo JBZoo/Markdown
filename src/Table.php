@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace JBZoo\Markdown;
 
-class Table
+final class Table
 {
     public const ALIGN_LEFT   = 'Left';
     public const ALIGN_CENTER = 'Center';
@@ -123,7 +123,7 @@ class Table
     /**
      * @param array[] $actualRows
      */
-    protected function calculateWidths(array $actualHeaders, array $actualRows): array
+    private function calculateWidths(array $actualHeaders, array $actualRows): array
     {
         $widths = [];
 
@@ -147,7 +147,7 @@ class Table
      * @param  int[]      $widths
      * @throws \Exception
      */
-    protected function renderHeaders(array $widths, array $actualHeaders): string
+    private function renderHeaders(array $widths, array $actualHeaders): string
     {
         $result = '| ';
 
@@ -168,7 +168,7 @@ class Table
      * @param  int[]      $widths
      * @throws \Exception
      */
-    protected function renderRows(array $widths, array $actualRows): string
+    private function renderRows(array $widths, array $actualRows): string
     {
         $result = '';
 
@@ -195,7 +195,7 @@ class Table
     /**
      * @param int[] $widths
      */
-    protected function renderAlignments(array $widths): string
+    private function renderAlignments(array $widths): string
     {
         $row = '|';
 
@@ -221,7 +221,7 @@ class Table
         return $row;
     }
 
-    protected function getColumnAlign(int|string $colIndex): string
+    private function getColumnAlign(int|string $colIndex): string
     {
         $validAligns      = [self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT];
         $actualAlignments = $this->alignments;
@@ -239,7 +239,12 @@ class Table
         return $result;
     }
 
-    protected static function renderCell(string $contents, string $alignment, int $width): string
+    private function isAutoIndexEnabled(): bool
+    {
+        return \count($this->autoIndexConfig) > 0;
+    }
+
+    private static function renderCell(string $contents, string $alignment, int $width): string
     {
         $map = [
             self::ALIGN_LEFT   => \STR_PAD_RIGHT,
@@ -250,10 +255,5 @@ class Table
         $padType = $map[$alignment] ?? \STR_PAD_LEFT;
 
         return \str_pad($contents, $width, ' ', $padType);
-    }
-
-    private function isAutoIndexEnabled(): bool
-    {
-        return \count($this->autoIndexConfig) > 0;
     }
 }
