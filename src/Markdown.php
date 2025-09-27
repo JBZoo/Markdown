@@ -20,7 +20,10 @@ use JBZoo\Utils\Str;
 
 use function JBZoo\Utils\isStrEmpty;
 
-class Markdown
+/**
+ * @psalm-suppress UnusedClass
+ */
+final class Markdown
 {
     /**
      * Insert link to Markdown text.
