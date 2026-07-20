@@ -11,18 +11,21 @@
     @see        https://github.com/JBZoo/Markdown
 -->
 <phpunit bootstrap="tests/autoload.php"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         convertDeprecationsToExceptions="true"
          executionOrder="random"
          processIsolation="false"
          stopOnError="false"
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         stopOnRisky="false"
->
+         stopOnRisky="false">
+    <coverage>
+        <report>
+            <html outputDirectory="build/coverage_html" lowUpperBound="75" highLowerBound="95"/>
+            <clover outputFile="build/coverage_xml/main.xml"/>
+            <php outputFile="build/coverage_cov/main.cov"/>
+            <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="false"/>
+        </report>
+    </coverage>
 
     <testsuites>
         <testsuite name="All">
@@ -30,18 +33,13 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
-
     <logging>
-        <log type="coverage-html" target="build/coverage_html" lowUpperBound="75" highLowerBound="95"/>
-        <log type="coverage-clover" target="build/coverage_xml/main.xml"/>
-        <log type="coverage-php" target="build/coverage_cov/main.cov"/>
-        <log type="junit" target="build/coverage_junit/main.xml"/>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="false"/>
+        <junit outputFile="build/coverage_junit/main.xml"/>
     </logging>
 
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
 </phpunit>

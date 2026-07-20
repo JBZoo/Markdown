@@ -1,7 +1,15 @@
 # JBZoo / Markdown
 
-[![CI](https://github.com/JBZoo/Markdown/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/JBZoo/Markdown/actions/workflows/main.yml?query=branch%3Amaster)    [![Coverage Status](https://coveralls.io/repos/github/JBZoo/Markdown/badge.svg?branch=master)](https://coveralls.io/github/JBZoo/Markdown?branch=master)    [![Psalm Coverage](https://shepherd.dev/github/JBZoo/Markdown/coverage.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![Psalm Level](https://shepherd.dev/github/JBZoo/Markdown/level.svg)](https://shepherd.dev/github/JBZoo/Markdown)    [![CodeFactor](https://www.codefactor.io/repository/github/jbzoo/markdown/badge)](https://www.codefactor.io/repository/github/jbzoo/markdown/issues)
-[![Stable Version](https://poser.pugx.org/jbzoo/markdown/version)](https://packagist.org/packages/jbzoo/markdown/)    [![Total Downloads](https://poser.pugx.org/jbzoo/markdown/downloads)](https://packagist.org/packages/jbzoo/markdown/stats)    [![Dependents](https://poser.pugx.org/jbzoo/markdown/dependents)](https://packagist.org/packages/jbzoo/markdown/dependents?order_by=downloads)    [![GitHub License](https://img.shields.io/github/license/jbzoo/markdown)](https://github.com/JBZoo/Markdown/blob/master/LICENSE)
+[![CI](https://github.com/JBZoo/Markdown/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/JBZoo/Markdown/actions/workflows/main.yml?query=branch%3Amaster)
+[![Coverage Status](https://coveralls.io/repos/github/JBZoo/Markdown/badge.svg?branch=master)](https://coveralls.io/github/JBZoo/Markdown?branch=master)
+[![Psalm Coverage](https://shepherd.dev/github/JBZoo/Markdown/coverage.svg)](https://shepherd.dev/github/JBZoo/Markdown)
+[![Psalm Level](https://shepherd.dev/github/JBZoo/Markdown/level.svg)](https://shepherd.dev/github/JBZoo/Markdown)
+[![CodeFactor](https://www.codefactor.io/repository/github/jbzoo/markdown/badge)](https://www.codefactor.io/repository/github/jbzoo/markdown/issues)
+
+[![Stable Version](https://poser.pugx.org/jbzoo/markdown/version)](https://packagist.org/packages/jbzoo/markdown/)
+[![Total Downloads](https://poser.pugx.org/jbzoo/markdown/downloads)](https://packagist.org/packages/jbzoo/markdown/stats)
+[![Dependents](https://poser.pugx.org/jbzoo/markdown/dependents)](https://packagist.org/packages/jbzoo/markdown/dependents?order_by=downloads)
+[![GitHub License](https://img.shields.io/github/license/jbzoo/markdown)](https://github.com/JBZoo/Markdown/blob/master/LICENSE)
 
 Tools to render markdown text from PHP code. This library provides a simple and fluent API for generating markdown elements programmatically, including tables with advanced formatting options.
 
@@ -9,13 +17,13 @@ Tools to render markdown text from PHP code. This library provides a simple and 
 
 - **Markdown Elements**: Generate links, titles, images, badges, blockquotes, spoilers, and code blocks
 - **Advanced Tables**: Create markdown tables with auto-indexing, custom alignments, and flexible rendering
-- **Type Safety**: Full PHP 8.2+ compatibility with strict typing
+- **Type Safety**: Full PHP 8.3+ compatibility with strict typing
 - **Fluent API**: Chainable methods for intuitive table building
 - **Zero Dependencies**: Lightweight with minimal external requirements
 
 ## Requirements
 
-- PHP 8.2 or higher
+- PHP 8.3 or higher
 - Composer
 
 ## Installing
