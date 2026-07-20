@@ -17,13 +17,13 @@ Tools to render markdown text from PHP code. This library provides a simple and 
 
 - **Markdown Elements**: Generate links, titles, images, badges, blockquotes, spoilers, and code blocks
 - **Advanced Tables**: Create markdown tables with auto-indexing, custom alignments, and flexible rendering
-- **Type Safety**: Full PHP 8.2+ compatibility with strict typing
+- **Type Safety**: Full PHP 8.3+ compatibility with strict typing
 - **Fluent API**: Chainable methods for intuitive table building
 - **Zero Dependencies**: Lightweight with minimal external requirements
 
 ## Requirements
 
-- PHP 8.2 or higher
+- PHP 8.3 or higher
 - Composer
 
 ## Installing

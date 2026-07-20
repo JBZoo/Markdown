@@ -19,7 +19,7 @@ The codebase is minimal and well-structured:
 - `tests/` - PHPUnit tests covering all functionality
 
 Key dependencies:
-- PHP 8.2+ (strict typing throughout)
+- PHP 8.3+ (strict typing throughout)
 - `jbzoo/utils` for string utilities
 - `jbzoo/toolbox-dev` for development tools (PHPUnit, linters, etc.)
 
